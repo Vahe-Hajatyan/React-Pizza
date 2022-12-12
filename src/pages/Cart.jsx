@@ -1,44 +1,47 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CartItems } from "../components";
-import { clearCart, removeCartItem, plusItem, minusItem } from '../redux/action/cart';
-import CartEmpty from '../assets/img/empty-cart.png';
-import { Link } from 'react-router-dom';
-
+import {
+  clearCart,
+  removeCartItem,
+  plusItem,
+  minusItem,
+} from "../redux/action/cart";
+import CartEmpty from "../assets/img/empty-cart.png";
+import { Link } from "react-router-dom";
 
 let Cart = () => {
-
   const dispatch = useDispatch();
 
-  const { items, totalPrice, totalCount } = useSelector(({ cart }) => cart)
+  const { items, totalPrice, totalCount } = useSelector(({ cart }) => cart);
 
-  const addedPizzas = Object.keys(items).map(key => {
+  const addedPizzas = Object.keys(items).map((key) => {
     return items[key].items[0];
-  })
+  });
 
   const onClearCart = () => {
-    if (window.confirm('вы действительно хотите очистить корзину?')) {
-      dispatch(clearCart())
+    if (window.confirm("вы действительно хотите очистить корзину?")) {
+      dispatch(clearCart());
     }
-  }
+  };
   const onRemoveItem = (id) => {
-    if (window.confirm('вы действительно хотите удалить?')) {
-      dispatch(removeCartItem(id))
+    if (window.confirm("вы действительно хотите удалить?")) {
+      dispatch(removeCartItem(id));
     }
-  }
+  };
 
   const onPlusItem = (id) => {
-    dispatch(plusItem(id))
-  }
+    dispatch(plusItem(id));
+  };
   const onMinusItem = (id) => {
-    dispatch(minusItem(id))
-  }
+    dispatch(minusItem(id));
+  };
 
   return (
     <div className="content">
       <div className="container container--cart">
-        {
-          totalCount ? <div className="cart">
+        {totalCount ? (
+          <div className="cart">
             <div className="cart__top">
               <h2 className="content__title">
                 <svg
@@ -46,7 +49,8 @@ let Cart = () => {
                   height="18"
                   viewBox="0 0 18 18"
                   fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path
                     d="M6.33333 16.3333C7.06971 16.3333 7.66667 15.7364 7.66667 15C7.66667 14.2636 7.06971 13.6667 6.33333 13.6667C5.59695 13.6667 5 14.2636 5 15C5 15.7364 5.59695 16.3333 6.33333 16.3333Z"
                     stroke="white"
@@ -77,7 +81,8 @@ let Cart = () => {
                   height="20"
                   viewBox="0 0 20 20"
                   fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path
                     d="M2.5 5H4.16667H17.5"
                     stroke="#B6B6B6"
@@ -112,9 +117,21 @@ let Cart = () => {
               </div>
             </div>
             <div className="content__items">
-              {
-                addedPizzas.map(obj => <CartItems key={obj.id}  id={obj.id} name={obj.name} type={obj.type} size={obj.size} pizzaImg={obj.imageUrl} totalPrice={items[obj.id].totalPrice} totalCount={items[obj.id].items.length} onRemove={onRemoveItem} onPlus={onPlusItem} onMinus={onMinusItem}/>)
-              }
+              {addedPizzas.map((obj) => (
+                <CartItems
+                  key={obj.id}
+                  id={obj.id}
+                  name={obj.name}
+                  type={obj.type}
+                  size={obj.size}
+                  pizzaImg={obj.imageUrl}
+                  totalPrice={items[obj.id].totalPrice}
+                  totalCount={items[obj.id].items.length}
+                  onRemove={onRemoveItem}
+                  onPlus={onPlusItem}
+                  onMinus={onMinusItem}
+                />
+              ))}
             </div>
             <div className="cart__bottom">
               <div className="cart__bottom-details">
@@ -126,13 +143,17 @@ let Cart = () => {
                 </span>
               </div>
               <div className="cart__bottom-buttons">
-                <a href="/" className="button button--outline button--add go-back-btn">
+                <a
+                  href="/"
+                  className="button button--outline button--add go-back-btn"
+                >
                   <svg
                     width="8"
                     height="14"
                     viewBox="0 0 8 14"
                     fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
                       d="M7 13L1 6.93015L6.86175 1"
                       stroke="#D3D3D3"
@@ -141,30 +162,37 @@ let Cart = () => {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <Link to={'/'}>
+                  <Link to={"/"}>
                     <span>Вернуться назад</span>
                   </Link>
                 </a>
                 <div className="button pay-btn">
-                  <span>Оплатить сейчас</span>
+                  <span onClick={alert("Оплата не роботает😭")}>
+                    Оплатить сейчас
+                  </span>
                 </div>
               </div>
             </div>
-          </div> : <div className="cart cart--empty">
-            <h2>Корзина пустая <icon>😕</icon></h2>
+          </div>
+        ) : (
+          <div className="cart cart--empty">
+            <h2>
+              Корзина пустая <icon>😕</icon>
+            </h2>
             <p>
-              Вероятней всего, вы не заказывали ещё пиццу.<br />
+              Вероятней всего, вы не заказывали ещё пиццу.
+              <br />
               Для того, чтобы заказать пиццу, перейди на главную страницу.
             </p>
             <img src={CartEmpty} alt="Empty cart" />
-            <Link to={'/'} className="button button--black">
+            <Link to={"/"} className="button button--black">
               <span>Вернуться назад</span>
             </Link>
           </div>
-        }
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Cart;
