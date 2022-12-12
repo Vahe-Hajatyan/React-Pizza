@@ -7,14 +7,10 @@ import { Provider } from 'react-redux';
 import store from './redux/Store';
 
 ReactDOM.render(
-  <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
         <App />
       </Provider>
-    </BrowserRouter>
-  </React.StrictMode>,
+    </BrowserRouter>,
   document.getElementById("root")
 );
-
-// cd C:\Users\user\Desktop\Pizza\pizza\React-Pizza

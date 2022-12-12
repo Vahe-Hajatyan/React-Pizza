@@ -18,6 +18,7 @@ const Categories = React.memo(({activeCategory, items, onClickItem }) => {
       </ul>
     </div>
   );
+  
 })
 
 export default Categories;
