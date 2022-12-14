@@ -167,9 +167,7 @@ let Cart = () => {
                   </Link>
                 </a>
                 <div className="button pay-btn">
-                  <span onClick={alert("Оплата не роботает😭")}>
-                    Оплатить сейчас
-                  </span>
+                  <span>Оплатить сейчас</span>
                 </div>
               </div>
             </div>
