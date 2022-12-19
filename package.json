@@ -77,7 +77,6 @@
       "react-app/jest"
     ]
   },
-  "proxy": "https://breakable-red-drill.cyclic.app",
   "browserslist": {
     "production": [
       ">0.2%",
